@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %> 
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <h1>All Events</h1>
+        <% if(events.length > 0) { 
+            const categories = {}; 
+            events.forEach(function(event) {
+                if(!categories[event.category]) {
+                    categories[event.category] = [];
+                }
+                categories[event.category].push(event);
+            }); %>
+            <% Object.keys(categories).forEach(function(category) { %>
+                <h2><%= category %></h2>
+                <% categories[category].forEach(function(event) { %>
+                    <a href="/event/<%= event._id %>/show"><p><%= event.title %></p></a> 
+                <% }) %>
+            <% }) %>
+        <% } else { %>
+            <p>No new events yet.</p>
+        <% } %>        
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html>

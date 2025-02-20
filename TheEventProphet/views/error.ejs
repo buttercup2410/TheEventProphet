@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/head') %>
+    <body>
+        <%- include('partials/header') %>
+        <div class="content">
+            <p><strong><%= error.status%> Error </strong></p>
+            <p><%= error.message%></p>     
+        </div>
+        <%- include('partials/footer') %>
+    </body>
+</html>

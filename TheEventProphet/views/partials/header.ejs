@@ -1,0 +1,63 @@
+<header>
+    <div class="container">
+        <a href="/"><img src="/images/logo.png" alt="The Event Prophet Logo" class="logo"></a>
+        <div class="header-buttons">
+            <% if(!user) { %>
+                <a href="/users/login" class="btn">Login</a>
+                <a href="/users/signup" class="btn">Sign Up</a>
+            <% } else { %>
+                <a href="/users/profile" class="btn"><%= user.firstName %>'s Profile</a>
+                <a href="/event/new" class="btn">New Event</a>
+                <a href="/users/logout" class="btn">Logout</a>
+            <% } %>
+        </div>
+    </div>
+</header>
+
+<nav class="events-nav">
+    <div class="container">
+        <ul>
+            <li><a href="/event/" class="events-btn">Events</a></li>
+        </ul>
+    </div>
+</nav>
+
+<% if(errorMessages.length > 0) {%>
+    <% errorMessages.forEach(message=>{%>
+        <div class='error'>
+            <p>
+            <%=message%>
+            </p>
+        </div>
+    <%});%>
+<%}%>
+
+<% if(successMessages.length > 0) {%>
+    <% successMessages.forEach(message=>{%>
+        <div class='success'>
+            <p style="margin: 20px 20px;">
+            <%=message%>
+            </p>
+        </div>
+    <%});%>
+<%}%>
+
+<script>
+    const targetElement = document.querySelector('.logo');
+    if (targetElement) {
+      const observer = new MutationObserver((mutations) => 
+      {
+        mutations.forEach((mutation) => {
+          if (mutation.attributeName === 'style') 
+          {
+            console.log('Style attribute detected, removing it.');
+            targetElement.removeAttribute('style');
+          }
+        });
+      });
+    observer.observe(targetElement, { attributes: true });
+      console.log('MutationObserver initialized for the logo.');
+    } else {
+      console.error('Logo element not found.');
+    }
+</script>

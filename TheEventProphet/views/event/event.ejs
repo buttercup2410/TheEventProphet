@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head') %> 
+    <body>
+        <%- include('../partials/header') %>
+        <main class="content"> 
+            <div>
+                <h4><%= event.title %></h4>
+                <% if(user && event.host._id != user.id) { %>
+                    <form class="header-buttons">
+                        <p><strong>Update RSVP:</strong></p>
+                        <button class="btn btn-outline-success" id="going" type="submit" formmethod="POST" formaction="/event/<%= event.id %>/rsvp?status=YES&_method=PUT">Yes</button>
+                        <button class="btn btn-outline-danger" id="not-going" type="submit" formmethod="POST" formaction="/event/<%= event.id %>/rsvp?status=NO&_method=PUT">No</button>
+                        <button class="btn btn-outline-primary" id="maybe" type="submit" formmethod="POST" formaction="/event/<%= event.id %>/rsvp?status=MAYBE&_method=PUT">Maybe</button>
+                    </form>
+                <% } %>
+            </div>
+            <p><strong>Number of RSVPs: <%=rsvp_count%></strong></p>
+            <div id="event" class="event-details">
+                <p><strong>Host:</strong> <%= event.host.firstName %> <%= event.host.lastName %></p>
+                <p><strong>Highlight:</strong> <%= event.highlight %></p>
+                <p><strong>Details:</strong> <%= event.details %></p>
+                <p><strong>Location:</strong> <%= event.location %></p> 
+                <p><strong>Category:</strong> <%= event.category %></p>
+                <p><strong>Start Date/Time:</strong> <%= startDisplayDate %></p>
+                <p><strong>End Date/Time:</strong> <%= endDisplayDate %></p>
+            </div>
+            <img class="event-image" src="/images/<%= event.image %>" alt="Event Image">
+        
+            <script>
+                const going = document.getElementById('going');
+                const notGoing = document.getElementById('not-going');
+                const maybe = document.getElementById('maybe');
+                if ('<%= rsvp_status %>' === 'YES') {
+                    going.classList.add('active');
+                } else if ('<%= rsvp_status %>' === 'NO') {
+                    notGoing.classList.add('active');
+                } else if ('<%= rsvp_status %>' === 'MAYBE') {
+                    maybe.classList.add('active');
+                }
+            </script>
+
+        </main>
+        <%- include('../partials/footer') %>
+    </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head') %> 
+    <body>
+        <%- include('../partials/header') %>
+        <main class="content">
+
+        <h1>Welcome, <%= user.firstName + ' ' + user.lastName %>! </h1>
+
+        <% if(events.length) { %>
+            <h3>You've created the following events:</h3>
+            <% events.forEach(event => { %>
+            <div class="event-item">
+                <a href='/event/<%= event.id %>/show'>
+                    <p><%= event.title %></p>
+                </a>
+                <form class="header-buttons">
+                    <button class="eventbtn" type="submit" formmethod="GET" formaction="/event/<%= event.id %>/edit">Edit</button>
+                    <button class="eventbtn" type="submit" formmethod="POST" formaction="/event/<%= event.id %>?_method=DELETE">Delete</button>
+                </form>
+            </div>
+            <% }); %>
+        <% } else { %>
+            <h3>No events yet!</h3>
+        <% } %>
+
+    <div>
+        <% if(rsvp_events.length > 0) { 
+            const categories = {}; 
+            rsvp_events.forEach(function(event) {
+                if(!categories[event.event.category]) {
+                    categories[event.event.category] = [];
+                }
+                categories[event.event.category].push(event);
+            }); %>
+            <h2>Your RSVPs:</h2>
+            <% Object.keys(categories).forEach(function(category) { %>
+                <h3><%= category %></h3>
+                <% categories[category].forEach(function(event) { %>
+                    <div class="flex-between">
+                        <div>
+                            <h5><a href="/event/<%= event.event._id %>/show" class="eventbtn"><%= event.event.title %></a>
+                            RSVP'd: <%= event.status %></h5>
+                        </div>
+                    </div>
+                <% }) %>
+            <% }) %>
+        <% } else { %>
+            <p>You have not RSVP'd to any events, yet.</p>
+        <% } %> 
+        </div>
+
+        <% if (user.isHost) { %>
+            <div class="event-item">
+                <h3>All Events You Are Associated With:</h3>
+                <% events.forEach(event => { %>
+                    <div class="event-item">
+                        <a href='/event/<%= event.id %>/show'>
+                            <p><%= event.title %></p>
+                        </a>
+                        <form class="header-buttons">
+                            <button class="eventbtn" type="submit" formmethod="GET" formaction="/event/<%= event.id %>/edit">Edit</button>
+                            <button class="eventbtn" type="submit" formmethod="POST" formaction="/event/<%= event.id %>?_method=DELETE">Delete</button>
+                        </form>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+
+        </main>
+        <%- include('../partials/footer') %> 
+    </body>
+</html>

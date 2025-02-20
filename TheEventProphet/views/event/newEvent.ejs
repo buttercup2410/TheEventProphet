@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %> 
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <section class="introduction">
+            <h1>Create a New Event</h1>
+            <form class="event-form" method="POST" action="/event" enctype="multipart/form-data">
+                <label for="title">Event Title:</label>
+                <input type="text" id="title" name="title" required>
+                <!-- <br><br>
+                <label for="host">Event Host:</label>
+                <input type="text" id="host" name="host" required> --> 
+                <br><br>
+                <label for="highlight">Event Highlight:</label>
+                <input type="text" id="highlight" name="highlight" required>
+                <br><br>
+                <label for="details">Event Details:</label>
+                <input type="text" id="details" name="details" required minlength="10">
+                <br><br>
+                <label for="location">Event Location:</label>
+                <input type="text" id="location" name="location" required>
+                <br><br>
+                <label for="category">Category: </label>
+                <select id="category" name="category" required>
+                    <option value="Academic Events">Academic Events</option>
+                    <option value="Study Groups">Study Groups</option>
+                    <option value="Club Meetings">Club Meetings</option>
+                    <option value="Career Fairs">Career Fairs</option>
+                    <option value="Hackathons">Hackathons</option>
+                    <option value="Art Exhibitions">Art Exhibitions</option>
+                    <option value="Other">Other</option>
+                </select>
+                <br><br>
+                <label for="start">Start Date/Time:</label>
+                <input type="datetime-local" id="start" name="start" required>
+                <br><br>
+                <label for="end">End Date/Time:</label>
+                <input type="datetime-local" id="end" name="end" required>
+                <br><br>
+                <label for="image">Event Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+                <br><br>
+                <button type="submit" class="btn">Create Event</button>
+            </form>
+        </section>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html>

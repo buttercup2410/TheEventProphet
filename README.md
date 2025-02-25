@@ -1,8 +1,6 @@
 # The Event Prophet - Campus Event Management System
 
-# The Event Prophet 🎯
-
-A dynamic web application for campus event management, built with Node.js, Express.js, MongoDB, and JavaScript.
+A dynamic web application for campus event management so that you are aware of the university events that are happening.
 
 ## Features ✨
 
@@ -16,6 +14,7 @@ A dynamic web application for campus event management, built with Node.js, Expre
 
 - Node.js
 - Express.js
+- HTML
 - MongoDB
 - JavaScript
 
@@ -68,14 +67,6 @@ npm start
 }
 
 ```
-
-## Contributing 🤝
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License 📄
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Author 
 
